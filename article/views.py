@@ -28,3 +28,16 @@ def search_tag(request, tag) :
     except models.Article.DoesNotExist :
         raise Http404
     return render(request, 'tag.html', {'post_list' : post_list})
+
+def blog_search(request):
+	if 's' in request.GET:
+		s = request.GET['s']
+		if not s:
+			return render(request, 'home.html')
+		else:
+			post_list = models.Article.objects.filter(title=s)
+			status = True
+			if len(post_list) > 0:
+				status = False
+			return render(request, 'archives.html', {'post_list':post_list, 'error':status})
+		return redirect('/')

@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^(?P<id>\d+)/$', 'article.views.detail', name='detail'),
     url(r'^archives/$', 'article.views.archives', name = 'archives'),
     url(r'^tag(?P<tag>\w+)/$', 'article.views.search_tag', name = 'search_tag'),
+    url(r'^search/$','article.views.blog_search', name = 'search'),
 ]

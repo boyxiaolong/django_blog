@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load custom_markdown %}
+{% load django_markdown %}
 
 {% block content %}
 <div class="posts">
@@ -14,7 +14,7 @@
 
                 <div class="post-description">
                     <p>
-                        {{ post.content|custom_markdown }}
+                        {{ post.content|markdown }}
                     </p>
                 </div>
         </section>

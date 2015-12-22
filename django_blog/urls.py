@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'article.views.home'),
     url(r'^/home/$', 'article.views.home', name='home'),
-    url(r'^about/$', 'article.views.about'),
+    url(r'^/about/$', 'article.views.about', name='about'),
     url(r'^(?P<id>\d+)/$', 'article.views.detail', name='detail'),
+    url(r'^/search_tag/$', 'article.views.search_tag', name='search_tag')
 ]

@@ -8,3 +8,9 @@ def home(request):
     return render(request, 'home.html', {'post_list' : post_list})
 def about(request):
 	return render(request, 'about.html')
+def detail(request, id):
+    try:
+        post = models.Article.objects.get(id=str(id))
+    except Article.DoesNotExist:
+        raise Http404
+    return render(request, 'post.html', {'post' : post})

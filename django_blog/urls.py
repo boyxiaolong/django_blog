@@ -22,5 +22,5 @@ urlpatterns = [
     url(r'^/home/$', 'article.views.home', name='home'),
     url(r'^/about/$', 'article.views.about', name='about'),
     url(r'^(?P<id>\d+)/$', 'article.views.detail', name='detail'),
-    url(r'^/search_tag/$', 'article.views.search_tag', name='search_tag')
+    ##url(r'^/search_tag/', 'article.views.search_tag', name='search_tag')
 ]

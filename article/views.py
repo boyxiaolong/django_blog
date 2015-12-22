@@ -14,3 +14,5 @@ def detail(request, id):
     except Article.DoesNotExist:
         raise Http404
     return render(request, 'post.html', {'post' : post})
+def search_tag(request, category):
+	return Http404

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 import models
+from django.contrib.syndication.views import Feed
 
 # Create your views here.
 def home(request):
@@ -41,3 +42,20 @@ def blog_search(request):
 				status = False
 			return render(request, 'archives.html', {'post_list':post_list, 'error':status})
 		return redirect('/')
+
+class RSSFeed(Feed) :
+    title = "RSS feed - article"
+    link = "feeds/posts/"
+    description = "RSS feed - blog posts"
+
+    def items(self):
+        return models.Article.objects.order_by('-date_time')
+
+    def item_title(self, item):
+        return item.title
+
+    def item_pubdate(self, item):
+        return item.date_time
+
+    def item_description(self, item):
+        return item.content

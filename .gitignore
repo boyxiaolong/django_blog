@@ -10,3 +10,5 @@ django_blog/urls.pyc
 *.pyc
 
 *.pyc
+
+*.pyc

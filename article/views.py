@@ -13,6 +13,18 @@ def detail(request, id):
         post = models.Article.objects.get(id=str(id))
     except Article.DoesNotExist:
         raise Http404
+    print "detail", id
     return render(request, 'post.html', {'post' : post})
-def search_tag(request, category):
-	return Http404
+def archives(request):
+	try:
+		post_list = models.Article.objects.all()
+	except models.Article.DoesNotExist:
+		return Http404
+	return render(request, 'archives.html', {'post_list':post_list,
+		'error':False})
+def search_tag(request, tag) :
+    try:
+        post_list = models.Article.objects.filter(category__iexact = tag) #contains
+    except models.Article.DoesNotExist :
+        raise Http404
+    return render(request, 'tag.html', {'post_list' : post_list})

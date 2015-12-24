@@ -70,7 +70,16 @@ def modify(request, id):
         post = models.Article.objects.get(id=str(id))
     except Article.DoesNotExist:
         raise Http404
-    return render(request, "edit.html", {'post':post})
+    if request.POST:
+        title = request.POST.get('title', "")
+        content = request.POST.get('content', "")
+        tag = request.POST.get("tag", "")
+        post.title = title
+        post.content = content
+        post.tag = tag
+        print "title: ", title
+        post.save()
+    return render(request, "post_modify.html", {'post':post})
 class RSSFeed(Feed) :
     title = "RSS feed - article"
     link = "feeds/posts/"

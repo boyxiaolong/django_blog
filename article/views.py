@@ -53,7 +53,14 @@ def newblog(request):
     if request.POST:
         c = {}
         c.update(csrf(request))
-        print request.POST
+        title = request.POST.get('title', "")
+        content = request.POST.get('content', "")
+        tag = request.POST.get("tag", "")
+        print title, " ", content, " ", tag
+        if len(title) > 0:
+            blog = models.Article(title=title, category=tag, content=content)
+            blog.save()
+            print "create blog"
         return render(request, "post_success.html", c)
     else:
         return render(request, 'newblog.html')

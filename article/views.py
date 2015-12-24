@@ -58,9 +58,9 @@ def newblog(request):
         tag = request.POST.get("tag", "")
         print title, " ", content, " ", tag
         if len(title) > 0:
-            blog = models.Article(title=title, category=tag, content=content)
-            blog.save()
-            print "create blog"
+            new_post,create = models.Article.objects.update_or_create(title=title, category=tag, content=content)
+            new_post.save()
+            return render(request, 'post.html', {'post' : new_post})
         return render(request, "post_success.html", c)
     else:
         return render(request, 'newblog.html')

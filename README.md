@@ -12,6 +12,9 @@ A person blog developed by django
 
 1）添加新博客
 
+2）修改博客标题、内容、分类
+
+
 ....
 其他新功能会看情况添加
 

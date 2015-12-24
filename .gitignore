@@ -14,3 +14,5 @@ django_blog/urls.pyc
 *.pyc
 
 article/views.pyc
+
+django_blog/settings.pyc

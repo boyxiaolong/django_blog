@@ -2,6 +2,12 @@ from django.shortcuts import render
 
 import models
 from django.contrib.syndication.views import Feed
+from django.http import HttpResponse
+import logging
+from django.core.context_processors import csrf
+
+
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 def home(request):
@@ -43,6 +49,14 @@ def blog_search(request):
 			return render(request, 'archives.html', {'post_list':post_list, 'error':status})
 		return redirect('/')
 
+def newblog(request):
+    if request.POST:
+        c = {}
+        c.update(csrf(request))
+        print request.POST
+        return render(request, "post_success.html", c)
+    else:
+        return render(request, 'newblog.html')
 class RSSFeed(Feed) :
     title = "RSS feed - article"
     link = "feeds/posts/"

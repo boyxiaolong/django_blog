@@ -42,7 +42,7 @@ def blog_search(request):
 		if not s:
 			return render(request, 'home.html')
 		else:
-			post_list = models.Article.objects.filter(title=s)
+			post_list = models.Article.objects.filter(title__contains=s)
 			status = True
 			if len(post_list) > 0:
 				status = False

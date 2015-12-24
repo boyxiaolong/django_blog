@@ -16,6 +16,7 @@ def home(request):
 def about(request):
 	return render(request, 'about.html')
 def detail(request, id):
+    print "try detail"
     try:
         post = models.Article.objects.get(id=str(id))
     except Article.DoesNotExist:
@@ -64,8 +65,12 @@ def newblog(request):
     else:
         return render(request, 'newblog.html')
 def modify(request, id):
-    content = "success"
-    return render(request, "post_success.html", {'content':content})
+    print "try to modify"
+    try:
+        post = models.Article.objects.get(id=str(id))
+    except Article.DoesNotExist:
+        raise Http404
+    return render(request, "edit.html", {'post':post})
 class RSSFeed(Feed) :
     title = "RSS feed - article"
     link = "feeds/posts/"

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% load django_markdown %}
+{% block content %}
+<form action="." method="post">{% csrf_token %}
+    <p>
+        <input type="text" name = 'title' id="txtTitle" placeholder={{post.title}} value={{post.title}} />
+    </p>
+    <p>
+        <textarea id='editor' name='content' rows='30' style="width:99%" value="content" placehoder={{post.content}}>
+            {{post.content}}
+        </textarea>
+    </p>
+    <p>
+        <input type="text" name = 'tag' id="txtTag" value={{post.category}} />
+    </p>
+    <input type="submit" value="保存">
+</form>
+{% endblock %}

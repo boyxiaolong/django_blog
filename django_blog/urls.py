@@ -28,4 +28,5 @@ urlpatterns = [
     url(r'^search/$','article.views.blog_search', name = 'search'),
     url(r'^feed/$', RSSFeed(), name = "RSS"),
     url(r'^newblog/', 'article.views.newblog', name='newblog'),
+    url(r'^(?P<id>\d+)/$', 'article.views.modify', name="modify"),
 ]

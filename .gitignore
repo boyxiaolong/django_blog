@@ -18,3 +18,5 @@ article/views.pyc
 django_blog/settings.pyc
 
 db.sqlite3
+
+article/models.pyc

@@ -1,0 +1,7 @@
+{% extends "post.html" %}
+{% block bottom %}
+<div class="url">test</div>
+<div class="modify" algin="center">
+<span class = "link edit"><a href="{% url "modify" id=post.id %}">modify</span>
+</div><!-- /.blog-post -->
+{% endblock %}

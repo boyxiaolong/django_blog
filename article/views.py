@@ -20,8 +20,7 @@ def detail(request, id):
         post = models.Article.objects.get(id=str(id))
     except Article.DoesNotExist:
         raise Http404
-    print "detail", id
-    return render(request, 'post.html', {'post' : post})
+    return render(request, 'post_modify.html', {'post' : post})
 def archives(request):
 	try:
 		post_list = models.Article.objects.all()
@@ -64,6 +63,9 @@ def newblog(request):
         return render(request, "post_success.html", c)
     else:
         return render(request, 'newblog.html')
+def modify(request, id):
+    content = "success"
+    return render(request, "post_success.html", {'content':content})
 class RSSFeed(Feed) :
     title = "RSS feed - article"
     link = "feeds/posts/"

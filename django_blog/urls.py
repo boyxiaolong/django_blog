@@ -29,4 +29,5 @@ urlpatterns = [
     url(r'^feed/$', RSSFeed(), name = "RSS"),
     url(r'^newblog/', 'article.views.newblog', name='newblog'),
     url(r'^/modify/(?P<id>\d+)/$', 'article.views.modify', name="modify"),
+    url(r'^/upload/', 'article.views.upload_pic', name='upload_pic'),
 ]

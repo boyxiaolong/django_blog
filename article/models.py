@@ -18,3 +18,6 @@ class Article(models.Model) :
     	return "http://127.0.0.1:8000%s"%path
     class Meta:
         ordering = ['-date_time']
+
+class ExampleModel(models.Model):
+    image = models.ImageField(upload_to='photos/%Y/%m/%d')

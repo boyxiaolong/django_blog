@@ -2,5 +2,12 @@
 {% block bottom %}
 <div class="modify" algin="center">
 <span class = "link edit"><a href="{% url "modify" id=post.id %}">modify</span>
+ <form action="{%url "upload_pic" %}" method="post" enctype="multipart/form-data">
+ {% csrf_token %}
+                <p>
+                    <input id="id_image" type="file" class="" name="image">
+                </p>
+                <input type="submit" value="Submit" />
+</form>
 </div><!-- /.blog-post -->
 {% endblock %}

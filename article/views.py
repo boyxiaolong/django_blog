@@ -2,10 +2,11 @@ from django.shortcuts import render
 
 import models
 from django.contrib.syndication.views import Feed
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 import logging
 from django.core.context_processors import csrf
-
+from django.views.generic import FormView,DetailView,ListView
+import forms
 
 logger = logging.getLogger(__name__)
 
@@ -79,7 +80,9 @@ def modify(request, id):
         post.tag = tag
         print "title: ", title
         post.save()
-    return render(request, "post_modify.html", {'post':post})
+        return render(request, "post_modify.html", {'post':post})
+    else:
+        return render(request, "edit.html", {'post':post})
 class RSSFeed(Feed) :
     title = "RSS feed - article"
     link = "feeds/posts/"
@@ -96,3 +99,12 @@ class RSSFeed(Feed) :
 
     def item_description(self, item):
         return item.content
+def upload_pic(request):
+    if request.method == 'POST':
+        form = forms.ImageUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            m = models.ExampleModel()
+            m.model_pic = form.cleaned_data['image']
+            m.save()
+            return HttpResponse('image upload success')
+    return HttpResponseForbidden('allowed only via POST')

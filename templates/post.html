@@ -2,6 +2,7 @@
 {% load django_markdown %}
 
 {% block content %}
+<link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}styles/code.css"/>
 <div class="posts">
         <section class="post">
             <header class="post-header">
@@ -12,7 +13,7 @@
             </header>
                 <div class="post-description">
                     <p>
-                        {{ post.content|markdown }}
+                        {{ post.content|markdown|markdown:'codehilite' }}
                     </p>
                 </div>
         </section>

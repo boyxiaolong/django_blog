@@ -66,7 +66,7 @@ def newblog(request):
     else:
         return render(request, 'newblog.html')
 def modify(request, id):
-    print "try to modify"
+    print "try to modify ", request
     try:
         post = models.Article.objects.get(id=str(id))
     except Article.DoesNotExist:

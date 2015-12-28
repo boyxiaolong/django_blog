@@ -16,4 +16,14 @@
     </p>
     <input type="submit" value="保存">
 </form>
+
+<div class="modify" algin="center">
+ <form action="{%url "upload_pic" %}" method="post" enctype="multipart/form-data">
+ {% csrf_token %}
+                <p>
+                    <input id="id_image" type="file" class="" name="image">
+                </p>
+                <input type="submit" value="Submit" />
+</form>
+</div><!-- /.blog-post -->
 {% endblock %}

@@ -22,7 +22,11 @@ def detail(request, id):
         post = models.Article.objects.get(id=str(id))
     except Article.DoesNotExist:
         raise Http404
-    return render(request, 'post_modify.html', {'post' : post})
+    images = models.ExampleModel.objects.filter(article=post)
+    print len(images)
+    for image in images:
+        print image
+    return render(request, 'post_modify.html', {'post' : post, 'images':images})
 def archives(request):
 	try:
 		post_list = models.Article.objects.all()

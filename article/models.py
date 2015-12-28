@@ -21,3 +21,6 @@ class Article(models.Model) :
 
 class ExampleModel(models.Model):
     image = models.ImageField(upload_to='photos/%Y/%m/%d')
+    article = models.ForeignKey('Article', null=True)
+    def __str__(self):
+        return self.image.name

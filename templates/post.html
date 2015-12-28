@@ -16,6 +16,13 @@
                         {{ post.content|markdown|markdown:'codehilite' }}
                     </p>
                 </div>
+                <div class="post-images">
+                    {% for image in images %}
+                        <p>
+                            <img src="{{image.image.url}}">
+                        </p>
+                    {%endfor%}
+                </div>
         </section>
             {% block bottom %}
             {% endblock %}

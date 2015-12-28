@@ -16,14 +16,60 @@
     </p>
     <input type="submit" value="保存">
 </form>
+{%for image in images%}
+<p>
+<li>
+    <span id="justurl">
+        {{image.image.url}}
+    </span>
+    <a href='#' id="1" onclick="insert_img(this); return false;">
+        [插入]
+    </a>
+</li>
+<script type="text/javascript">
+    String.format = function() {
+    if( arguments.length == 0 )
+        return null;
 
-<div class="modify" algin="center">
+    var str = arguments[0]; 
+    for(var i=1;i<arguments.length;i++) {
+        var re = new RegExp('\\{' + (i-1) + '\\}','gm');
+        str = str.replace(re, arguments[i]);
+    }
+    return str;
+    }
+
+    function insert_img(e){
+        try {
+            var o = e.previousSibling;
+            while(o.nodeType != 1)
+            {
+                o=o.previousSibling;
+            }
+            var url = o.innerHTML;
+            var str = String.format("<img src='{0}'>",url);
+            xh.loadBookmark(); 
+            xh.pasteHTML(str);
+            alert(str);
+        }
+        catch (err) {
+            alert(err.message);
+        }
+    }
+</script>
+</p>
+{%endfor%}
+
+<br>
+<fieldset>
+<legend>
+</legend>
  <form action="{%url "upload_pic" %}" method="post" enctype="multipart/form-data">
  {% csrf_token %}
                 <p>
                     <input id="id_image" type="file" class="" name="image">
                 </p>
-                <input type="submit" value="Submit" />
+                <input type="submit" value="插入图片" />
 </form>
-</div><!-- /.blog-post -->
+</fieldset>
 {% endblock %}

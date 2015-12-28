@@ -23,9 +23,6 @@ def detail(request, id):
     except Article.DoesNotExist:
         raise Http404
     images = models.ExampleModel.objects.filter(article=post)
-    print len(images)
-    for image in images:
-        print image
     return render(request, 'post_modify.html', {'post' : post, 'images':images})
 def archives(request):
 	try:
@@ -82,11 +79,11 @@ def modify(request, id):
         post.title = title
         post.content = content
         post.tag = tag
-        print "title: ", title
         post.save()
         return render(request, "post_modify.html", {'post':post})
     else:
-        return render(request, "edit.html", {'post':post})
+        images = models.ExampleModel.objects.filter(article=post)
+        return render(request, "edit.html", {'post':post, 'images':images})
 class RSSFeed(Feed) :
     title = "RSS feed - article"
     link = "feeds/posts/"

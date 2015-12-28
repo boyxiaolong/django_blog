@@ -38,38 +38,27 @@
     }
     return str;
     }
-function insertAtCaret(areaId,text) {
-    var txtarea = document.getElementById(areaId);
-    var scrollPos = txtarea.scrollTop;
-    var strPos = 0;
-    var br = ((txtarea.selectionStart || txtarea.selectionStart == '0') ? 
-        "ff" : (document.selection ? "ie" : false ) );
-    if (br == "ie") { 
-        txtarea.focus();
-        var range = document.selection.createRange();
-        range.moveStart ('character', -txtarea.value.length);
-        strPos = range.text.length;
-    }
-    else if (br == "ff") strPos = txtarea.selectionStart;
 
-    var front = (txtarea.value).substring(0,strPos);  
-    var back = (txtarea.value).substring(strPos,txtarea.value.length); 
-    txtarea.value=front+text+back;
-    strPos = strPos + text.length;
-    if (br == "ie") { 
-        txtarea.focus();
-        var range = document.selection.createRange();
-        range.moveStart ('character', -txtarea.value.length);
-        range.moveStart ('character', strPos);
-        range.moveEnd ('character', 0);
-        range.select();
+function insertAtCursor(areaId, myValue) {
+    var myField = document.getElementById(areaId);
+    //IE support
+    if (document.selection) {
+        myField.focus();
+        sel = document.selection.createRange();
+        sel.text = myValue;
     }
-    else if (br == "ff") {
-        txtarea.selectionStart = strPos;
-        txtarea.selectionEnd = strPos;
-        txtarea.focus();
+    //MOZILLA and others
+    else if (myField.selectionStart || myField.selectionStart == '0') {
+        var startPos = myField.selectionStart;
+        var endPos = myField.selectionEnd;
+        myField.value = myField.value.substring(0, startPos)
+            + myValue
+            + myField.value.substring(endPos, myField.value.length);
+        myField.selectionStart = startPos + myValue.length;
+        myField.selectionEnd = startPos + myValue.length;
+    } else {
+        myField.value += myValue;
     }
-    txtarea.scrollTop = scrollPos;
 }
 
     function insert_img(e){
@@ -81,7 +70,7 @@ function insertAtCaret(areaId,text) {
             }
             var url = o.innerHTML;
             var str = String.format("<img src='{0}'>",url);
-            insertAtCaret("editor", str);
+            insertAtCursor("editor", str);
         }
         catch (err) {
             alert(err.message);

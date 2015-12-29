@@ -7,9 +7,20 @@ import logging
 from django.core.context_processors import csrf
 from django.views.generic import FormView,DetailView,ListView
 import forms
+from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
+from django.forms import ModelForm
 
 logger = logging.getLogger(__name__)
 
+class ArticleForm(ModelForm):
+    class Meta:
+        model = models.Article
+        fields = '__all__'
+        widgets = {
+            'title' : SummernoteInplaceWidget(),
+            'content' : SummernoteWidget(),
+            'category' : SummernoteInplaceWidget(),
+        }
 # Create your views here.
 def home(request):
     post_list = models.Article.objects.all()
@@ -65,7 +76,8 @@ def newblog(request):
             return render(request, 'post.html', {'post' : new_post})
         return render(request, "post_success.html", c)
     else:
-        return render(request, 'newblog.html')
+        form = ArticleForm()
+        return render(request, 'newblog.html', {'form':form})
 def modify(request, id):
     print "try to modify ", request
     try:
@@ -82,8 +94,8 @@ def modify(request, id):
         post.save()
         return render(request, "post_modify.html", {'post':post})
     else:
-        images = models.ExampleModel.objects.filter(article=post)
-        return render(request, "edit.html", {'post':post, 'images':images})
+        form = ArticleForm()
+        return render(request, "edit.html", {'post':post, 'form':form})
 class RSSFeed(Feed) :
     title = "RSS feed - article"
     link = "feeds/posts/"

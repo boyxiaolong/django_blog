@@ -3,16 +3,7 @@
 {% load django_markdown %}
 {% block content %}
 <form action="." method="post">{% csrf_token %}
-    <p>
-        <input type="text" name = 'title' id="txtTitle" placeholder="标题" value="title" />
-    </p>
-    <p>
-        <textarea id='editor' name='content' rows='30' style="width:99%" value="content">
-        </textarea>
-    </p>
-    <p>
-        <input type="text" name = 'tag' id="txtTag" placeholder="tag" value="tag" />
-    </p>
+    {{ form.as_p }}
     <input type="submit" value="保存">
 </form>
 {% endblock %}

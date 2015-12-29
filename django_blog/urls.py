@@ -32,4 +32,5 @@ urlpatterns = [
     url(r'^newblog/', 'article.views.newblog', name='newblog'),
     url(r'^/modify/(?P<id>\d+)/$', 'article.views.modify', name="modify"),
     url(r'^/upload/', 'article.views.upload_pic', name='upload_pic'),
+    url(r'^summernote/', include('django_summernote.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

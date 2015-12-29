@@ -2,104 +2,12 @@
 
 {% load django_markdown %}
 {% block content %}
-{% load wysiwyg %}
-{% wysiwyg_setup %}
-<form action="." method="post">{% csrf_token %}
-    <p>
-        <input type="text" name = 'title' id="txtTitle" placeholder={{post.title}} value={{post.title}} />
-    </p>
 
-    <textarea id="content" name='content'>
-    <p>
-        {{post.content}}
-    </p>
-    </textarea>
-
-    {% wysiwyg_editor "content" %}
-
-    <p>
-        <input type="text" name = 'tag' id="txtTag" value={{post.category}} />
-    </p>
-    <input type="submit" value="保存">
+<form action="." method="POST">
+    {% csrf_token %}
+    {{forms.media}}
+    {{ form.as_p }}
+    <input type="submit" />
 </form>
-{%for image in images%}
-<p>
-<li>
-    <span id="justurl">
-        {{image.image.url}}
-    </span>
-    <a href='#' id="1" onclick="insert_img(this); return false;">
-        [插入]
-    </a>
-</li>
-<script type="text/javascript">
-    String.format = function() {
-    if( arguments.length == 0 )
-        return null;
 
-    var str = arguments[0]; 
-    for(var i=1;i<arguments.length;i++) {
-        var re = new RegExp('\\{' + (i-1) + '\\}','gm');
-        str = str.replace(re, arguments[i]);
-    }
-    return str;
-    }
-
-function insertAtCursor(areaId, myValue) {
-    var myField = document.getElementById(areaId);
-    //IE support
-    if (document.selection) {
-        myField.focus();
-        sel = document.selection.createRange();
-        sel.text = myValue;
-    }
-    //MOZILLA and others
-    else if (myField.selectionStart || myField.selectionStart == '0') {
-        var startPos = myField.selectionStart;
-        var endPos = myField.selectionEnd;
-        myField.value = myField.value.substring(0, startPos)
-            + myValue
-            + myField.value.substring(endPos, myField.value.length);
-        myField.selectionStart = startPos + myValue.length;
-        myField.selectionEnd = startPos + myValue.length;
-    } else {
-        myField.value += myValue;
-    }
-}
-
-    function insert_img(e){
-        try {
-            var o = e.previousSibling;
-            while(o.nodeType != 1)
-            {
-                o=o.previousSibling;
-            }
-            var url = o.innerHTML;
-            //var str = String.format("<img src='{0}'>",url);
-            //insertAtCursor("editor", str);
-            var board = document.getElementById("board");
-            var e = document.createElement("img");
-            e.src = url;
-            var object = e.appendChild(e);
-        }
-        catch (err) {
-            alert(err.message);
-        }
-    }
-</script>
-</p>
-{%endfor%}
-
-<br>
-<fieldset>
-<legend>
-</legend>
- <form action="{%url "upload_pic" %}" method="post" enctype="multipart/form-data">
- {% csrf_token %}
-                <p>
-                    <input id="id_image" type="file" class="" name="image">
-                </p>
-                <input type="submit" value="插入图片" />
-</form>
-</fieldset>
 {% endblock %}

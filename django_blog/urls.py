@@ -17,7 +17,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import include, url
 from django.contrib import admin
-from article.views import RSSFeed
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -26,11 +25,9 @@ urlpatterns = [
     url(r'^/about/$', 'article.views.about', name='about'),
     url(r'^(?P<id>\d+)/$', 'article.views.detail', name='detail'),
     url(r'^archives/$', 'article.views.archives', name = 'archives'),
-    url(r'^(?P<category>\w+)/$', 'article.views.search_tag', name = 'search_tag'),
-    url(r'^search/$','article.views.blog_search', name = 'search'),
-    url(r'^feed/$', RSSFeed(), name = "RSS"),
-    url(r'^newblog/', 'article.views.newblog', name='newblog'),
+    url(r'^(?P<tag>\w+)/$', 'article.views.search_tag', name = 'search_tag'),
+    url(r'^search/','article.views.blog_search', name = 'search'),
+    url(r'^newblog/$', 'article.views.newblog', name='newblog'),
     url(r'^/modify/(?P<id>\d+)/$', 'article.views.modify', name="modify"),
-    url(r'^/upload/', 'article.views.upload_pic', name='upload_pic'),
     url(r'^summernote/', include('django_summernote.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -13,6 +13,7 @@ logger = logging.getLogger(__name__)
 
 # Create your views here.
 def home(request):
+    print("home")
     post_list = models.Article.objects.all()
     return render(request, 'home.html', {'post_list' : post_list})
 def about(request):
@@ -24,7 +25,7 @@ def detail(request, id):
     except Article.DoesNotExist:
         raise Http404
     images = models.ExampleModel.objects.filter(article=post)
-    return render(request, 'post_modify.html', {'post' : post, 'images':images})
+    return render(request, 'post.html', {'post' : post})
 def archives(request):
 	try:
 		post_list = models.Article.objects.all()
@@ -32,27 +33,28 @@ def archives(request):
 		return Http404
 	return render(request, 'archives.html', {'post_list':post_list,
 		'error':False})
-def search_tag(request, category) :
+def search_tag(request, tag) :
     try:
-        post_list = models.Article.objects.filter(category__iexact = category) #contains
+        print "111"
+        post_list = models.Article.objects.filter(category__iexact = tag) #contains
     except models.Article.DoesNotExist :
         raise Http404
     return render(request, 'tag.html', {'post_list' : post_list})
 
 def blog_search(request):
-	if 's' in request.GET:
-		s = request.GET['s']
-		if not s:
-			return render(request, 'home.html')
-		else:
-			post_list = models.Article.objects.filter(title__contains=s)
-			status = True
-			if len(post_list) > 0:
-				status = False
-			return render(request, 'archives.html', {'post_list':post_list, 'error':status})
-		return redirect('/')
+    s = request.GET['s']
+    if not s:
+        print request
+        return render(request, 'home.html')
+    else:
+        post_list = models.Article.objects.filter(title__contains=s)
+        status = True
+        if len(post_list) > 0:
+            status = False
+        return render(request, 'archives.html', {'post_list':post_list, 'error':status})
 
 def newblog(request):
+    print "newlog"
     if request.POST:
         print "there"
         c = {}
@@ -89,28 +91,3 @@ def modify(request, id):
     else:
         form = forms.AnotherForm()
         return render(request, "edit.html", {'post':post, 'form':form})
-class RSSFeed(Feed) :
-    title = "RSS feed - article"
-    link = "feeds/posts/"
-    description = "RSS feed - blog posts"
-
-    def items(self):
-        return models.Article.objects.order_by('-date_time')
-
-    def item_title(self, item):
-        return item.title
-
-    def item_pubdate(self, item):
-        return item.date_time
-
-    def item_description(self, item):
-        return item.content
-def upload_pic(request):
-    if request.method == 'POST':
-        form = forms.ImageUploadForm(request.POST, request.FILES)
-        if form.is_valid():
-            m = models.ExampleModel()
-            m.model_pic = form.cleaned_data['image']
-            m.save()
-            return HttpResponse('image upload success')
-    return HttpResponseForbidden('allowed only via POST')

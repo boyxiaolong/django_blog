@@ -11,7 +11,5 @@ class ArticleForm(forms.ModelForm):
         model = models.Article
         fields = '__all__'
         widgets = {
-            'title' : SummernoteInplaceWidget(),
             'content' : SummernoteWidget(),
-            'category' : SummernoteInplaceWidget(),
         }

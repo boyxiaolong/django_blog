@@ -5,8 +5,7 @@
 
 <form action="." method="POST">
     {% csrf_token %}
-    {{forms.media}}
-    {{ form.as_p }}
+    {{ form.title | safe }}
     <input type="submit" />
 </form>
 

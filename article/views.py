@@ -7,20 +7,10 @@ import logging
 from django.core.context_processors import csrf
 from django.views.generic import FormView,DetailView,ListView
 import forms
-from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 from django.forms import ModelForm
 
 logger = logging.getLogger(__name__)
 
-class ArticleForm(ModelForm):
-    class Meta:
-        model = models.Article
-        fields = '__all__'
-        widgets = {
-            'title' : SummernoteInplaceWidget(),
-            'content' : SummernoteWidget(),
-            'category' : SummernoteInplaceWidget(),
-        }
 # Create your views here.
 def home(request):
     post_list = models.Article.objects.all()
@@ -42,9 +32,9 @@ def archives(request):
 		return Http404
 	return render(request, 'archives.html', {'post_list':post_list,
 		'error':False})
-def search_tag(request, tag) :
+def search_tag(request, category) :
     try:
-        post_list = models.Article.objects.filter(category__iexact = tag) #contains
+        post_list = models.Article.objects.filter(category__iexact = category) #contains
     except models.Article.DoesNotExist :
         raise Http404
     return render(request, 'tag.html', {'post_list' : post_list})
@@ -64,11 +54,13 @@ def blog_search(request):
 
 def newblog(request):
     if request.POST:
+        print "there"
         c = {}
         c.update(csrf(request))
         title = request.POST.get('title', "")
         content = request.POST.get('content', "")
         tag = request.POST.get("tag", "")
+        form = forms.ArticleForm(request.POST)
         print title, " ", content, " ", tag
         if len(title) > 0:
             new_post,create = models.Article.objects.update_or_create(title=title, category=tag, content=content)
@@ -76,25 +68,26 @@ def newblog(request):
             return render(request, 'post.html', {'post' : new_post})
         return render(request, "post_success.html", c)
     else:
-        form = ArticleForm()
+        print "here"
+        form = forms.ArticleForm()
         return render(request, 'newblog.html', {'form':form})
 def modify(request, id):
     print "try to modify ", request
     try:
         post = models.Article.objects.get(id=str(id))
-    except Article.DoesNotExist:
+    except models.Article.DoesNotExist:
         raise Http404
     if request.POST:
         title = request.POST.get('title', "")
         content = request.POST.get('content', "")
-        tag = request.POST.get("tag", "")
+        category = request.POST.get("category", "")
         post.title = title
         post.content = content
-        post.tag = tag
+        post.category = category
         post.save()
         return render(request, "post_modify.html", {'post':post})
     else:
-        form = ArticleForm()
+        form = forms.AnotherForm()
         return render(request, "edit.html", {'post':post, 'form':form})
 class RSSFeed(Feed) :
     title = "RSS feed - article"

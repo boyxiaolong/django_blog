@@ -5,3 +5,5 @@ db.sqlite3
 .migrations/*
 static/*
 
+
+.idea/workspace.xml

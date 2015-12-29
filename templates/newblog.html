@@ -3,7 +3,7 @@
 {% load django_markdown %}
 {% block content %}
 <form action="." method="post">{% csrf_token %}
-    {{ form.as_p }}
+    {{ form }}
     <input type="submit" value="保存">
 </form>
 {% endblock %}

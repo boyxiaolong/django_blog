@@ -3,7 +3,7 @@ db.sqlite3
 *.jpg
 /migrations/*
 static/*
-
+venv
 .media/*
 .idea/*
 article/migrations/*

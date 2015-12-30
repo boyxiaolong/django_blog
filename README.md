@@ -21,9 +21,9 @@ A person blog developed by django
 欢迎 star，😄
 
 依赖:
-python2.7
-django1.8.2
-django_markdown-0.8.4
-django_summer latest
-bootstarp 0.3.6
+<br>python2.7
+<br>django1.8.2
+<br>django_markdown-0.8.4
+<br>django_summer latest
+<br>bootstarp 0.3.6
 

@@ -1,7 +1,7 @@
 *.pyc
 db.sqlite3
 *.jpg
-.migrations/*
+/migrations/*
 static/*
 
 .media/*

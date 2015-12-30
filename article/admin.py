@@ -4,4 +4,3 @@ from django_summernote.admin import SummernoteModelAdmin
 import models
 
 admin.site.register(models.Article)
-admin.site.register(models.ExampleModel)

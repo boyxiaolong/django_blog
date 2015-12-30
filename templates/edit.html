@@ -5,7 +5,12 @@
 
 <form action="." method="POST">
     {% csrf_token %}
-    {{ form.title | safe }}
+    {% for field in form %}
+    <tr>
+        <p>{{ field.label_tag }}</p>
+        <p>{{ field }}</p>
+    </tr>
+    {% endfor %}
     <input type="submit" />
 </form>
 

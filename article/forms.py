@@ -8,3 +8,11 @@ class ImageUploadForm(forms.Form):
 
 class ArticleForm(forms.Form):
     content = forms.CharField(widget=SummernoteWidget())
+
+class ArticleWigetForm(forms.ModelForm):
+    class Meta:
+        model = models.Article
+        exclude = ['date_time']
+        widgets = {
+            'content' : SummernoteWidget(),
+        }

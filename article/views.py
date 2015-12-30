@@ -13,19 +13,17 @@ logger = logging.getLogger(__name__)
 
 # Create your views here.
 def home(request):
-    print("home")
     post_list = models.Article.objects.all()
     return render(request, 'home.html', {'post_list' : post_list})
 def about(request):
 	return render(request, 'about.html')
 def detail(request, id):
-    print "try detail"
     try:
         post = models.Article.objects.get(id=str(id))
     except Article.DoesNotExist:
         raise Http404
     images = models.ExampleModel.objects.filter(article=post)
-    return render(request, 'post.html', {'post' : post})
+    return render(request, 'post_modify.html', {'post' : post})
 def archives(request):
 	try:
 		post_list = models.Article.objects.all()
@@ -35,16 +33,15 @@ def archives(request):
 		'error':False})
 def search_tag(request, tag) :
     try:
-        print "111"
         post_list = models.Article.objects.filter(category__iexact = tag) #contains
     except models.Article.DoesNotExist :
         raise Http404
     return render(request, 'tag.html', {'post_list' : post_list})
 
 def blog_search(request):
-    s = request.GET['s']
+    print "blog_search"
+    s = request.GET['search_text']
     if not s:
-        print request
         return render(request, 'home.html')
     else:
         post_list = models.Article.objects.filter(title__contains=s)
@@ -66,14 +63,13 @@ def newblog(request):
         if len(title) > 0:
             new_post,create = models.Article.objects.update_or_create(title=title, category=tag, content=content)
             new_post.save()
-            return render(request, 'post.html', {'post' : new_post})
+            return render(request, 'post_modify.html', {'post' : new_post})
         return render(request, "post_success.html", c)
     else:
         form = forms.ArticleForm()
         return render(request, 'newblog.html', {'form':form})
 
 def modify(request, id):
-    print "try to modify ", request
     try:
         post = models.Article.objects.get(id=str(id))
     except models.Article.DoesNotExist:
@@ -88,5 +84,5 @@ def modify(request, id):
         post.save()
         return render(request, "post_modify.html", {'post':post})
     else:
-        form = forms.AnotherForm()
+        form = forms.ArticleWigetForm(instance=post)
         return render(request, "edit.html", {'post':post, 'form':form})

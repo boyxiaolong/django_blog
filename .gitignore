@@ -1,9 +1,8 @@
 *.pyc
-
 db.sqlite3
 *.jpg
 .migrations/*
 static/*
 
-
-.idea/workspace.xml
+.media/*
+.idea/*

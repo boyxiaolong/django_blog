@@ -24,6 +24,6 @@ A person blog developed by django
 <br>python2.7
 <br>django1.8.2
 <br>django_markdown-0.8.4
-<br>django_summer latest
+<br>django_summernote latest
 <br>bootstarp 0.3.6
 

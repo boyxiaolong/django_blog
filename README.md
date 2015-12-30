@@ -20,4 +20,10 @@ A person blog developed by django
 
 欢迎 star，😄
 
+依赖:
+python2.7
+django1.8.2
+django_markdown-0.8.4
+django_summer latest
+bootstarp 0.3.6
 

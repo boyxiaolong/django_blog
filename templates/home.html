@@ -15,7 +15,7 @@
 
                 <div class="post-description">
                     <p>
-                        {{ post.content|truncatechars:100 }}
+                        {{ post.content|truncatechars:100|safe }}
                     </p>
                 </div>
                 <a class="pure-button" href="{% url "detail" id=post.id %}">Read More >>> </a>

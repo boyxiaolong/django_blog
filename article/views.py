@@ -54,25 +54,24 @@ def blog_search(request):
         return render(request, 'archives.html', {'post_list':post_list, 'error':status})
 
 def newblog(request):
-    print "newlog"
     if request.POST:
-        print "there"
         c = {}
         c.update(csrf(request))
         title = request.POST.get('title', "")
-        content = request.POST.get('content', "")
         tag = request.POST.get("tag", "")
         form = forms.ArticleForm(request.POST)
-        print title, " ", content, " ", tag
+        content = ""
+        if form.is_valid():
+            content = form.cleaned_data['content']
         if len(title) > 0:
             new_post,create = models.Article.objects.update_or_create(title=title, category=tag, content=content)
             new_post.save()
             return render(request, 'post.html', {'post' : new_post})
         return render(request, "post_success.html", c)
     else:
-        print "here"
         form = forms.ArticleForm()
         return render(request, 'newblog.html', {'form':form})
+
 def modify(request, id):
     print "try to modify ", request
     try:

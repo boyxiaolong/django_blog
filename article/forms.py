@@ -6,10 +6,5 @@ class ImageUploadForm(forms.Form):
     """Image upload form."""
     image = forms.ImageField()
 
-class ArticleForm(forms.ModelForm):
-    class Meta:
-        model = models.Article
-        fields = '__all__'
-        widgets = {
-            'content' : SummernoteWidget(),
-        }
+class ArticleForm(forms.Form):
+    content = forms.CharField(widget=SummernoteWidget())

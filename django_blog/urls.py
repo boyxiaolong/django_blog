@@ -27,7 +27,7 @@ urlpatterns = [
     url(r'^archives/$', 'article.views.archives', name = 'archives'),
     url(r'^(?P<tag>\w+)/$', 'article.views.search_tag', name = 'search_tag'),
     url(r'^search/','article.views.blog_search', name = 'search'),
-    url(r'^newblog/$', 'article.views.newblog', name='newblog'),
+    url(r'^/newblog/$', 'article.views.newblog', name='newblog'),
     url(r'^/modify/(?P<id>\d+)/$', 'article.views.modify', name="modify"),
     url(r'^summernote/', include('django_summernote.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

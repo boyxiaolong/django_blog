@@ -3,6 +3,20 @@
 {% load django_markdown %}
 {% block content %}
 <form action="." method="post">{% csrf_token %}
+    <p>
+        标题 : <input type="text" name="title" />
+    </p>
+    {% for field in form %}
+    <div class="fieldWrapper">
+        <p>
+            内容
+        </p>
+         {{ field }}
+    </div>
+    {% endfor %}
+    <p>
+        标签 : <input type="text" name="tag" />
+    </p>
     <input type="submit" value="保存">
 </form>
 {% endblock %}

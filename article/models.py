@@ -12,9 +12,9 @@ class Article(models.Model) :
         return self.title
 
     def get_ori_url(self):
-        return "http://127.0.0.1:8000/"
+        return "http://0.0.0.1:8000/"
     def get_absolute_url(self):
     	path = reverse('detail', kwargs={'id':self.id})
-    	return "http://127.0.0.1:8000%s"%path
+    	return "http://0.0.0.1:8000%s"%path
     class Meta:
         ordering = ['-date_time']

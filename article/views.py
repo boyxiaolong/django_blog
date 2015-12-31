@@ -30,7 +30,7 @@ def archives(request):
 		return Http404
 	return render(request, 'archives.html', {'post_list':post_list,
 		'error':False})
-def search_tag(request, category) :
+def search_category(request, category) :
     try:
         post_list = models.Article.objects.filter(category__iexact = category) #contains
     except models.Article.DoesNotExist :

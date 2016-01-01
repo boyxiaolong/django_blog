@@ -52,8 +52,8 @@ def blog_search(request):
 def newblog(request):
     if request.POST:
         ##just temp
-        return render(request, "post_success.html", {'content': "服务器返回一个问题"})
-        
+        return render(request, "post_success.html", "Sorry! U dont't hv the auth")
+
         c = {}
         c.update(csrf(request))
         title = request.POST.get('title', "")

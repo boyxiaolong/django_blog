@@ -78,7 +78,7 @@ def modify(request, id):
         raise Http404
     if request.POST:
         ##just temp
-        return render(request, "post_success.html", {'content': "服务器返回一个问题"})
+        return render(request, "post_success.html", {'content':"服务器返回一个问题"})
 
         title = request.POST.get('title', "")
         content = request.POST.get('content', "")

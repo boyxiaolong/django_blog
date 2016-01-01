@@ -51,6 +51,8 @@ def blog_search(request):
 
 def newblog(request):
     if request.POST:
+        ##just temp
+        return render("noauth.html", request)
         c = {}
         c.update(csrf(request))
         title = request.POST.get('title', "")
@@ -74,6 +76,8 @@ def modify(request, id):
     except models.Article.DoesNotExist:
         raise Http404
     if request.POST:
+        ##just temp
+        return render("noauth.html", request
         title = request.POST.get('title', "")
         content = request.POST.get('content', "")
         category = request.POST.get("category", "")

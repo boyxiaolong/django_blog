@@ -77,7 +77,7 @@ def modify(request, id):
         raise Http404
     if request.POST:
         ##just temp
-        return render("noauth.html", request
+        return render("noauth.html", request)
         title = request.POST.get('title', "")
         content = request.POST.get('content', "")
         category = request.POST.get("category", "")

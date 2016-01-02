@@ -52,8 +52,7 @@ def blog_search(request):
 def newblog(request):
     if request.POST:
         ##just temp
-        return render(request, "post_success.html", "Sorry! U dont't hv the auth")
-
+        return render(request, "post_success.html", {'content':"The Server post a porblem!"})
         c = {}
         c.update(csrf(request))
         title = request.POST.get('title', "")
@@ -78,8 +77,7 @@ def modify(request, id):
         raise Http404
     if request.POST:
         ##just temp
-        return render(request, "post_success.html", {'content':"服务器返回一个问题"})
-
+        return render(request, "post_success.html", {'content':"The Server post a porblem!"})
         title = request.POST.get('title', "")
         content = request.POST.get('content', "")
         category = request.POST.get("category", "")

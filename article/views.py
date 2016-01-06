@@ -52,7 +52,7 @@ def blog_search(request):
 
 def newblog(request):
     if request.user.is_authenticated() == False:
-        return render(request, "login.html")
+        return render(request, "registration/login.html")
     if request.POST:
         c = {}
         c.update(csrf(request))
@@ -73,7 +73,7 @@ def newblog(request):
 
 def modify(request, id):
     if request.user.is_authenticated() == False:
-        return render(request, "login.html")
+        return render(request, "registration/login.html")
     try:
         post = models.Article.objects.get(id=str(id))
     except models.Article.DoesNotExist:

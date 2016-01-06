@@ -90,14 +90,3 @@ def modify(request, id):
     else:
         form = forms.ArticleWigetForm(instance=post)
         return render(request, "edit.html", {'post':post, 'form':form})
-
-tmp_str = 'lucky_number'
-def use_session(requset):
-    requset.session[tmp_str] = 8
-
-    if tmp_str in requset.session:
-        lucky_number = requset.session[tmp_str]
-
-        response = HttpResponse('u lucky_number is ' + lucky_number)
-    del requset.session[tmp_str]
-    return response

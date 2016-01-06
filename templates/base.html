@@ -40,7 +40,7 @@
                         <a class="button-success pure-button" href="{% url "create_blog" %}">添加新文章</a>
                     </li>
                     <li class="nav-item">
-                        <a class="button-success pure-button" href="{% url "django.contrib.auth.views.login" %}{% firstof request.path '/' %}">登陆</a>
+                        <a class="button-success pure-button" href="{% url "django.contrib.auth.views.login" %}?next={% firstof request.path '/' %}">登陆</a>
                     </li>
                     <form class="pure-form" action="/search/" method="get">
                         <input class="pure-input-3-3" type="text" name="search_text" placeholder="search">

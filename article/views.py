@@ -51,9 +51,10 @@ def blog_search(request):
         return render(request, 'archives.html', {'post_list':post_list, 'error':status})
 
 def newblog(request):
+    if request.user.is_authenticated() == False:
+        return render(request, "login.html")
+
     if request.POST:
-        if request.user.is_authenticated() == False:
-            return render(request, "login.html")
         c = {}
         c.update(csrf(request))
         title = request.POST.get('title', "")

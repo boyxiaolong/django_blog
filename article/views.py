@@ -17,14 +17,18 @@ logger = logging.getLogger(__name__)
 def home(request):
     post_list = models.Article.objects.all()
     return render(request, 'home.html', {'post_list' : post_list})
+
 def about(request):
-	return render(request, 'about.html')
+    print "about"
+    return render(request, 'about.html')
+
 def detail(request, id):
     try:
         post = models.Article.objects.get(id=str(id))
     except Article.DoesNotExist:
         raise Http404
     return render(request, 'post_modify.html', {'post' : post})
+
 def archives(request):
 	try:
 		post_list = models.Article.objects.all()
@@ -32,6 +36,7 @@ def archives(request):
 		return Http404
 	return render(request, 'archives.html', {'post_list':post_list,
 		'error':False})
+
 def search_category(request, category) :
     try:
         post_list = models.Article.objects.filter(category__iexact = category) #contains
@@ -51,6 +56,7 @@ def blog_search(request):
         return render(request, 'archives.html', {'post_list':post_list, 'error':status})
 
 def create_blog(request):
+    print "create_blog"
     if not request.user.is_authenticated():
         return render(request, "post_success.html", {'content':"pls login first"})
     if request.POST:
@@ -91,6 +97,8 @@ def modify(request, id):
         form = forms.ArticleWigetForm(instance=post)
         return render(request, "edit.html", {'post':post, 'form':form})
 def login(request):
+    c = {}
+    c.update(csrf(request))
     if request.user.is_authenticated():
         return HttpResponseRedirect('/home/')
 
@@ -103,4 +111,4 @@ def login(request):
         auth.login(request, user)
         return HttpResponseRedirect('/home/')
     else:
-        return render_to_response('login.html')
+        return render_to_response('registration/login.html')

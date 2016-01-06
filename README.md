@@ -14,7 +14,7 @@ A person blog developed by django
 
 2）修改博客标题、内容、分类
 
-
+<br>3)增加权限限制,必须登陆才能创建修改内容
 ....
 其他新功能会看情况添加
 

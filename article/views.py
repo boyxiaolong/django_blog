@@ -8,6 +8,7 @@ from django.core.context_processors import csrf
 from django.views.generic import FormView,DetailView,ListView
 import forms
 from django.forms import ModelForm
+from django.contrib import auth
 
 logger = logging.getLogger(__name__)
 
@@ -51,8 +52,8 @@ def blog_search(request):
 
 def newblog(request):
     if request.POST:
-        ##just temp
-        return render(request, "post_success.html", {'content':"The Server post a porblem!"})
+        if request.user.is_authenticated() == False:
+            return render(request, "login.html")
         c = {}
         c.update(csrf(request))
         title = request.POST.get('title', "")
@@ -77,7 +78,8 @@ def modify(request, id):
         raise Http404
     if request.POST:
         ##just temp
-        return render(request, "post_success.html", {'content':"The Server post a porblem!"})
+        if request.user.is_authenticated() == False:
+            return render(request, "login.html")
         title = request.POST.get('title', "")
         content = request.POST.get('content', "")
         category = request.POST.get("category", "")

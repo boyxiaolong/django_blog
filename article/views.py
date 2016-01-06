@@ -53,7 +53,6 @@ def blog_search(request):
 def newblog(request):
     if request.user.is_authenticated() == False:
         return render(request, "login.html")
-
     if request.POST:
         c = {}
         c.update(csrf(request))
@@ -73,14 +72,13 @@ def newblog(request):
         return render(request, 'newblog.html', {'form':form})
 
 def modify(request, id):
+    if request.user.is_authenticated() == False:
+        return render(request, "login.html")
     try:
         post = models.Article.objects.get(id=str(id))
     except models.Article.DoesNotExist:
         raise Http404
     if request.POST:
-        ##just temp
-        if request.user.is_authenticated() == False:
-            return render(request, "login.html")
         title = request.POST.get('title', "")
         content = request.POST.get('content', "")
         category = request.POST.get("category", "")
@@ -92,3 +90,14 @@ def modify(request, id):
     else:
         form = forms.ArticleWigetForm(instance=post)
         return render(request, "edit.html", {'post':post, 'form':form})
+
+tmp_str = 'lucky_number'
+def use_session(requset):
+    requset.session[tmp_str] = 8
+
+    if tmp_str in requset.session:
+        lucky_number = requset.session[tmp_str]
+
+        response = HttpResponse('u lucky_number is ' + lucky_number)
+    del requset.session[tmp_str]
+    return response

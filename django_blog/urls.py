@@ -29,5 +29,5 @@ urlpatterns = [
     url(r'^create_blog/$', 'article.views.create_blog', name = 'create_blog'),
     url(r'^modify/(?P<id>\d+)/$', 'article.views.modify', name="modify"),
     url(r'^summernote/', include('django_summernote.urls')),
-    url(r'^accounts/', include('django.contrib.auth.urls')),
+    url('^', include('django.contrib.auth.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

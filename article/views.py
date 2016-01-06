@@ -39,7 +39,6 @@ def search_category(request, category) :
     return render(request, 'tag.html', {'post_list' : post_list})
 
 def blog_search(request):
-    print "blog_search"
     s = request.GET['search_text']
     if not s:
         return render(request, 'home.html')
@@ -51,8 +50,8 @@ def blog_search(request):
         return render(request, 'archives.html', {'post_list':post_list, 'error':status})
 
 def create_blog(request):
-    if not request.user.is_authenticated():
-        return render(request, "registration/login.html")
+    #if not request.user.is_authenticated():
+    #    return render(request, "registration/login.html")
     if request.POST:
         c = {}
         c.update(csrf(request))

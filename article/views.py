@@ -8,6 +8,7 @@ from django.core.context_processors import csrf
 from django.views.generic import FormView,DetailView,ListView
 import forms
 from django.forms import ModelForm
+from django.contrib import auth
 
 logger = logging.getLogger(__name__)
 
@@ -51,6 +52,8 @@ def blog_search(request):
         return render(request, 'archives.html', {'post_list':post_list, 'error':status})
 
 def newblog(request):
+    if request.user.is_authenticated() == False:
+        return render(request, "login.html")
     if request.POST:
         c = {}
         c.update(csrf(request))
@@ -75,6 +78,8 @@ def modify(request, id):
     except models.Article.DoesNotExist:
         raise Http404
     if request.POST:
+        if request.user.is_authenticated() == False:
+            return render(request, "login.html")
         title = request.POST.get('title', "")
         content = request.POST.get('content', "")
         category = request.POST.get("category", "")
@@ -86,3 +91,14 @@ def modify(request, id):
     else:
         form = forms.ArticleWigetForm(instance=post)
         return render(request, "edit.html", {'post':post, 'form':form})
+
+tmp_str = 'lucky_number'
+def use_session(requset):
+    requset.session[tmp_str] = 8
+
+    if tmp_str in requset.session:
+        lucky_number = requset.session[tmp_str]
+
+        response = HttpResponse('u lucky_number is ' + lucky_number)
+    del requset.session[tmp_str]
+    return response

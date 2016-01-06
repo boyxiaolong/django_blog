@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form action="{% url "login" %}" method="POST">
+    {% csrf_token %}
+    <label for="username">用戶名稱:</label>
+    <input type="text" name="username" value="" id="username"> <br />
+    <label for="password">用戶密碼:</label>
+    <input type="password" name="password" value="" id="password"> <br />
+    <input type="submit" value="登入"/>
+</form>
+
+{% endblock %}

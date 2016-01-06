@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^archives/$', 'article.views.archives', name = 'archives'),
     url(r'^(?P<category>[\w\-]+)/$', 'article.views.search_category', name = 'search_category'),
     url(r'^search/','article.views.blog_search', name = 'search'),
-    url(r'^newblog/$', 'article.views.newblog', name='newblog'),
+    url(r'^create_log/$', 'article.views.create_log', name = 'create_log'),
     url(r'^modify/(?P<id>\d+)/$', 'article.views.modify', name="modify"),
     url(r'^summernote/', include('django_summernote.urls')),
     url(r'^accounts/', include('django.contrib.auth.urls')),

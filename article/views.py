@@ -50,8 +50,8 @@ def blog_search(request):
             status = False
         return render(request, 'archives.html', {'post_list':post_list, 'error':status})
 
-def newblog(request):
-    if request.user.is_authenticated() == False:
+def create_log(request):
+    if not request.user.is_authenticated():
         return render(request, "registration/login.html")
     if request.POST:
         c = {}
@@ -72,7 +72,7 @@ def newblog(request):
         return render(request, 'newblog.html', {'form':form})
 
 def modify(request, id):
-    if request.user.is_authenticated() == False:
+    if not request.user.is_authenticated():
         return render(request, "registration/login.html")
     try:
         post = models.Article.objects.get(id=str(id))

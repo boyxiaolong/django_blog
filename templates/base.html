@@ -36,12 +36,12 @@
                     <li class="nav-item">
                         <a class="button-success pure-button" href="/">专题</a>
                     </li>
-                    <form class="pure-form" action="/search/" method="get">
-                        <input class="pure-input-3-3" type="text" name="search_text" placeholder="search">
-                    </form>
                     <li class="nav-item">
                         <a class="button-success pure-button" href="{% url "create_blog" %}">添加新文章</a>
                     </li>
+                    <form class="pure-form" action="/search/" method="get">
+                        <input class="pure-input-3-3" type="text" name="search_text" placeholder="search">
+                    </form>
                 </ul>
             </nav>
         </div>

@@ -50,7 +50,7 @@ def blog_search(request):
             status = False
         return render(request, 'archives.html', {'post_list':post_list, 'error':status})
 
-def create_log(request):
+def create_blog(request):
     if not request.user.is_authenticated():
         return render(request, "registration/login.html")
     if request.POST:

@@ -2,13 +2,14 @@ from django.shortcuts import render
 
 import models
 from django.contrib.syndication.views import Feed
-from django.http import HttpResponse, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 import logging
 from django.core.context_processors import csrf
 from django.views.generic import FormView,DetailView,ListView
 import forms
 from django.forms import ModelForm
 from django.contrib import auth
+from django.shortcuts import render_to_response
 
 logger = logging.getLogger(__name__)
 
@@ -89,3 +90,17 @@ def modify(request, id):
     else:
         form = forms.ArticleWigetForm(instance=post)
         return render(request, "edit.html", {'post':post, 'form':form})
+def login(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect('/home/')
+
+    username = request.POST.get('username', '')
+    password = request.POST.get('password', '')
+
+    user = auth.authenticate(username=username, password=password)
+
+    if user is not None and user.is_active:
+        auth.login(request, user)
+        return HttpResponseRedirect('/home/')
+    else:
+        return render_to_response('login.html')

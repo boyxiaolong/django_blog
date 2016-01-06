@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form action="{% url "django.contrib.auth.views.login" %}" method="POST">
+<form action="" method="POST">
     {% csrf_token %}
     <label for="username">用戶名稱:</label>
     <input type="text" name="username" value="" id="username"> <br />

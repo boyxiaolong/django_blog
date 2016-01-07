@@ -17,9 +17,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url('^static/','django.views.static.serve',{'document_root':settings.STATIC_ROOT},name='static'),
     url(r'^$', 'article.views.home', name='home'),
     url(r'^create_blog/$', 'article.views.create_blog', name = 'create_blog'),
     url(r'^search/','article.views.blog_search', name = 'search'),

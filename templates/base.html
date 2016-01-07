@@ -31,6 +31,13 @@
                          <li class="nav-item">
                             <a class="button-success pure-button" href="{%url 'create_blog' %}">添加新文章</a>
                          </li>
+                        <li class="nav-item">
+                            <a class="button-success pure-button" href="{%url 'django.contrib.auth.views.logout' %}?next=/">登出</a>
+                         </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="button-success pure-button" href="{%url 'django.contrib.auth.views.login' %}">登入</a>
+                         </li>
                     {% endif %}
                     <li class="nav-item">
                         <a class="pure-button" href="https://github.com/boyxiaolong">Github</a>

@@ -3,5 +3,7 @@ db.sqlite3
 /migrations/*
 static/*
 venv
-.media/*
+/media/*
 .idea/*
+
+*.png

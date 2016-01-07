@@ -96,19 +96,3 @@ def modify(request, id):
     else:
         form = forms.ArticleWigetForm(instance=post)
         return render(request, "edit.html", {'post':post, 'form':form})
-def login(request):
-    c = {}
-    c.update(csrf(request))
-    if request.user.is_authenticated():
-        return HttpResponseRedirect('/home/')
-
-    username = request.POST.get('username', '')
-    password = request.POST.get('password', '')
-
-    user = auth.authenticate(username=username, password=password)
-
-    if user is not None and user.is_active:
-        auth.login(request, user)
-        return HttpResponseRedirect('/home/')
-    else:
-        return render_to_response('registration/login.html')

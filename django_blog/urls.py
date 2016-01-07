@@ -21,7 +21,6 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'article.views.home', name='home'),
-    url(r'^login/$', 'article.views.login', name='login'),
     url(r'^create_blog/$', 'article.views.create_blog', name = 'create_blog'),
     url(r'^about/$', 'article.views.about', name='about'),
     url(r'^(?P<id>\d+)/$', 'article.views.detail', name='detail'),
@@ -29,5 +28,6 @@ urlpatterns = [
     url(r'^(?P<category>[\w\-]+)/$', 'article.views.search_category', name = 'search_category'),
     url(r'^search/','article.views.blog_search', name = 'search'),
     url(r'^modify/(?P<id>\d+)/$', 'article.views.modify', name="modify"),
+    url('^accounts/', include('django.contrib.auth.urls')),
     url(r'^summernote/', include('django_summernote.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -10,6 +10,7 @@ import forms
 from django.forms import ModelForm
 from django.contrib import auth
 from django.shortcuts import render_to_response
+from django.contrib.auth.decorators import login_required
 
 logger = logging.getLogger(__name__)
 
@@ -55,10 +56,8 @@ def blog_search(request):
             status = False
         return render(request, 'archives.html', {'post_list':post_list, 'error':status})
 
+@login_required
 def create_blog(request):
-    print "create_blog"
-    if not request.user.is_authenticated():
-        return render(request, "post_success.html", {'content':"pls login first"})
     if request.POST:
         c = {}
         c.update(csrf(request))
@@ -77,9 +76,8 @@ def create_blog(request):
         form = forms.ArticleForm()
         return render(request, 'newblog.html', {'form':form})
 
+@login_required
 def modify(request, id):
-    if not request.user.is_authenticated():
-        return render(request, "post_success.html", {'content':"pls login first"})
     try:
         post = models.Article.objects.get(id=str(id))
     except models.Article.DoesNotExist:

@@ -16,6 +16,8 @@ A person blog developed by django
 
 3)增加权限限制,必须登陆才能创建修改内容
 
+4)Disqus评论
+
 其他新功能会看情况添加
 
 项目已经部署在heroku上,地址 https://allenzhao.herokuapp.com 

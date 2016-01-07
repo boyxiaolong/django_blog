@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load django_markdown %}
+{% load disqus_tags %}
 
 {% block content %}
 <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}styles/code.css"/>
@@ -19,6 +20,9 @@
         </section>
             {% block bottom %}
             {% endblock %}
-        {% include "duoshuo.html" %}
+
+{% disqus_show_comments %}
+{% disqus_num_replies %}
+{% disqus_recent_comments shortname num_items excerpt_length hide_avatars avatar_size %}
 </div><!-- /.blog-post -->
 {% endblock %}

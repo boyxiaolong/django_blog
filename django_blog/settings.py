@@ -42,6 +42,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_summernote',
+    'django.contrib.sites',
+    'disqus',
     'article',
 )
 
@@ -57,7 +59,6 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'django_blog.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -128,3 +129,5 @@ LOGIN_REDIRECT_URL = "/home/"
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+DISQUS_API_KEY = '2zNeohXFcAyTkRAnMK0tgaVilL9y3UVJPajFyB5tEofdGx5mwah0pz37iqOK7MK9'
+DISQUS_WEBSITE_SHORTNAME = 'allen_blog'

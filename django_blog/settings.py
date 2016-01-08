@@ -129,6 +129,6 @@ LOGIN_REDIRECT_URL = "/home/"
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-DISQUS_API_KEY = '2zNeohXFcAyTkRAnMK0tgaVilL9y3UVJPajFyB5tEofdGx5mwah0pz37iqOK7MK9'
+DISQUS_API_KEY = '4amFRStA8RaEHsiiLxtObWec3SqnYlyKXoD6ENMCgko5yrYypmqypbjm2JG6x8wh'
 DISQUS_WEBSITE_SHORTNAME = 'allen_blog'
 SITE_ID = 1

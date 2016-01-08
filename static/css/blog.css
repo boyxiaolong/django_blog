@@ -95,6 +95,7 @@ h3 {
 .post-title {
     font-size: 2em;
     color: #222;
+    font-weight:bold;
     margin-bottom: 0.2em;
 }
 .post-avatar {
@@ -148,7 +149,8 @@ h3 {
     padding: 1em 0;
 }
 .footer a {
-    color: #ccc;
+    font-size: 5em;
+    color: #444;
     font-size: 80%;
 }
 .footer .pure-menu a:hover,

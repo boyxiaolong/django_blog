@@ -18,6 +18,8 @@ from django.conf.urls.static import static
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from article.views import PostRssFeed
+from django.contrib.syndication.views import Feed
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -26,6 +28,7 @@ urlpatterns = [
     url(r'^create_blog/$', 'article.views.create_blog', name = 'create_blog'),
     url(r'^search/','article.views.blog_search', name = 'search'),
     url(r'^about/$', 'article.views.about', name='about'),
+    url(r'^feed/$', PostRssFeed(), name = "RSS"),
     url(r'^(?P<id>\d+)/$', 'article.views.detail', name='detail'),
     url(r'^archives/$', 'article.views.archives', name = 'archives'),
     url(r'^(?P<category>[\w\-]+)/$', 'article.views.search_category', name = 'search_category'),

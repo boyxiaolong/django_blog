@@ -29,6 +29,9 @@
                     <li class="nav-item">
                         <a class="button-success pure-button" href="{%url 'archives' %}">归档</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="button-success pure-button" href="{%url 'RSS' %}">Feed</a>
+                    </li>
                     {% if user.is_authenticated %}
                          <li class="nav-item">
                             <a class="button-success pure-button" href="{%url 'create_blog' %}">添加新文章</a>

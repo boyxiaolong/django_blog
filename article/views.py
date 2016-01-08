@@ -1,7 +1,6 @@
 from django.shortcuts import render
 
 import models
-from django.contrib.syndication.views import Feed
 from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 import logging
 from django.core.context_processors import csrf
@@ -11,6 +10,9 @@ from django.forms import ModelForm
 from django.contrib import auth
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
+from django.contrib.syndication.views import Feed
+from django.utils.feedgenerator import Atom1Feed
+from django.contrib.sites.models import get_current_site
 
 logger = logging.getLogger(__name__)
 
@@ -94,3 +96,26 @@ def modify(request, id):
     else:
         form = forms.ArticleWigetForm(instance=post)
         return render(request, "edit.html", {'post':post, 'form':form})
+
+class PostRssFeed(Feed):
+    feed_type = Atom1Feed
+    title = u'AllenZhao \'s Blog'
+    link = 'http://' + get_current_site(None).domain
+    description = u'Welcome to AllenZhao \'s Blog'
+    author = 'AllenZhao'
+
+    def items(self):
+        return models.Article.objects.all().order_by('-date_time')[:10]
+
+    def item_title(self, item):
+        return item.title
+
+    def item_pubdate(self, item):
+        return item.date_time
+
+    def item_description(self, item):
+        return item.content
+
+class PostAtomFeed(PostRssFeed):
+    feed_type = Atom1Feed
+    subtitle = PostRssFeed.item_description

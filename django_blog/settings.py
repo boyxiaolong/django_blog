@@ -130,5 +130,5 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 DISQUS_API_KEY = '4amFRStA8RaEHsiiLxtObWec3SqnYlyKXoD6ENMCgko5yrYypmqypbjm2JG6x8wh'
-DISQUS_WEBSITE_SHORTNAME = 'allen_blog'
+DISQUS_WEBSITE_SHORTNAME = 'allenzhao_blog'
 SITE_ID = 1

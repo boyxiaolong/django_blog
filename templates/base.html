@@ -47,7 +47,27 @@
                          </li>
                     {% endif %}
                     <li class="nav-item">
-                        <a class="pure-button" href="https://github.com/boyxiaolong">Github</a>
+                         <style scoped>
+                            .button-allen {
+                                background:url('{% static 'img/apple-touch-icon-114.png' %}') center;
+                                    width:35px;
+                                    height: 35px;
+                                    border-radius:80%;
+                                    background-size: cover;
+                                    zoom: 1;
+                                    opacity: 0.5;
+                            }
+                            .button-allen:hover {
+	                                background:url('{% static 'img/apple-touch-icon-114.png' %}') center;
+                                    width:35px;
+                                    height: 35px;
+                                    border-radius:80%;
+                                    background-size: cover;
+                                    zoom: 1;
+                                    opacity: 1;
+                            }
+                        </style>
+                        <button class="button-allen pure-button" onclick="location.href='https://github.com/boyxiaolong'"></button>
                     </li>
                     <p>
                         <form class="pure-form" action="/search/" method="get">

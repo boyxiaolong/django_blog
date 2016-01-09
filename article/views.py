@@ -135,3 +135,11 @@ def index(request):
         topics = paginator.page(paginator.num_pages)
 
     return render_to_response('home.html', {'post_list': topics})
+
+def delete(request, id):
+    try:
+        post = models.Article.objects.get(id=str(id))
+    except models.Article.DoesNotExist:
+        raise Http404
+    post.delete()
+    return render(request, "post_success.html", {'content':"delete post success"})

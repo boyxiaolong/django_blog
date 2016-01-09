@@ -1,8 +1,13 @@
 {% extends "post.html" %}
 {% block bottom %}
     {% if user.is_authenticated %}
-        <div class="modify" algin="center">
-        <span class = "link edit"><a href="{% url "modify" id=post.id %}">修改</span>
+        <div class="pure-g">
+        <div class="modify pure-u-1-2" align="center">
+            <span class = "link edit"><a href="{% url "modify" id=post.id %}" target="">修改</span>
         </div><!-- /.blog-post -->
+            <div class="modify pure-u-1-2 " align="center">
+            <span class = "link edit"><a href="{% url "delete" id=post.id %}">删除</span>
+        </div><!-- /.blog-post -->
+        </div>
     {% endif %}
 {% endblock %}

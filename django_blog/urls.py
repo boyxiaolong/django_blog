@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^archives/$', 'article.views.archives', name = 'archives'),
     url(r'^(?P<category>[\w\-]+)/$', 'article.views.search_category', name = 'search_category'),
     url(r'^modify/(?P<id>\d+)/$', 'article.views.modify', name="modify"),
+    url(r'^delete/(?P<id>\d+)/$', 'article.views.delete', name="delete"),
     url('^accounts/', include('django.contrib.auth.urls')),
     url(r'^summernote/', include('django_summernote.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

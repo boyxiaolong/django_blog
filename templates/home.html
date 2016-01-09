@@ -21,13 +21,10 @@
                 <a class="pure-button" href="{% url "detail" id=post.id %}">Read More >>> </a>
         </section>
     {% endfor %}
-    <!-- 另一种分页显示方式 -->
 <p align="center">
 {% if post_list.has_previous %}
   <a href="?page={{ post_list.previous_page_number }}">Previous</a>
   {% endif %}
-  {# topics.paginator.number_pages 返回总页数 #}
-
 {% if post_list.has_next %}
   <a href="?page={{ post_list.next_page_number }}">Next</a>
 {% endif %}

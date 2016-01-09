@@ -36,6 +36,7 @@ h3 {
 .sidebar {
     background: rgb(100, 104, 162);
     color: #fff;
+    float: none;
 }
 
 .brand-title,
@@ -43,6 +44,7 @@ h3 {
     margin: 0;
 }
 .brand-title {
+    margin-top:20px;
     text-transform: uppercase;
 }
 .brand-tagline {

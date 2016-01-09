@@ -25,13 +25,54 @@
                 <ul class="nav-list">
                     <div class="pure-u-3-1">
                         <li class="nav-item">
-                        <a class="button-success pure-button" href="{%url 'home' %}">主页</a>
+                            <style scoped>
+                            .button-homepage{
+                                background:url('{% static 'img/homepage.jpg' %}') center;
+                                    width:35px;
+                                    height: 35px;
+                                    border-radius:80%;
+                                    background-size: cover;
+                                    zoom: 1;
+                                    opacity: 0.5;
+                            }
+                            .button-homepage:hover {
+	                                background:url('{% static 'img/homepage.jpg' %}') center;
+                                    width:35px;
+                                    height: 35px;
+                                    border-radius:80%;
+                                    background-size: cover;
+                                    zoom: 1;
+                                    opacity: 1;
+                            }
+                        </style>
+                            <button class="button-homepage pure-button" onclick="location.href='{%url 'home' %}'"></button>
                         </li>
+
                         <li class="nav-item">
                             <a class="button-success pure-button" href="{%url 'archives' %}">归档</a>
                         </li>
                         <li class="nav-item">
-                            <a class="button-success pure-button" href="{%url 'RSS' %}">Feed</a>
+                            <style scoped>
+                            .button-rss{
+                                background:url('{% static 'img/rss.png' %}') center;
+                                    width:35px;
+                                    height: 35px;
+                                    border-radius:80%;
+                                    background-size: cover;
+                                    zoom: 1;
+                                    opacity: 0.5;
+                            }
+                            .button-rss:hover {
+	                                background:url('{% static 'img/rss.png' %}') center;
+                                    width:35px;
+                                    height: 35px;
+                                    border-radius:80%;
+                                    background-size: cover;
+                                    zoom: 1;
+                                    opacity: 1;
+                            }
+                        </style>
+                            <button class="button-rss pure-button" onclick="location.href='{%url 'RSS' %}'"></button>
                         </li>
                     </div>
                     {% if user.is_authenticated %}

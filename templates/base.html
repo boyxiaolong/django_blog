@@ -47,10 +47,29 @@
                         </style>
                             <button class="button-homepage pure-button" onclick="location.href='{%url 'home' %}'"></button>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="button-success pure-button" href="{%url 'archives' %}">归档</a>
-                        </li>
+                    <li class="nav-item">
+                         <style scoped>
+                            .button-archive {
+                                background:url('{% static 'img/archive.ico' %}') center;
+                                    width:35px;
+                                    height: 35px;
+                                    border-radius:80%;
+                                    background-size: cover;
+                                    zoom: 1;
+                                    opacity: 0.5;
+                            }
+                            .button-archive:hover {
+	                                background:url('{% static 'img/archive.ico' %}') center;
+                                    width:35px;
+                                    height: 35px;
+                                    border-radius:80%;
+                                    background-size: cover;
+                                    zoom: 1;
+                                    opacity: 1;
+                            }
+                        </style>
+                        <button class="button-archive pure-button" onclick="location.href='{%url 'archives' %}'"></button>
+                    </li>
                         <li class="nav-item">
                             <style scoped>
                             .button-rss{
@@ -84,8 +103,28 @@
                          </li>
                         {% else %}
                         <li class="nav-item">
-                            <a class="button-success pure-button" href="{%url 'django.contrib.auth.views.login' %}">登入</a>
-                         </li>
+                         <style scoped>
+                            .button-login {
+                                background:url('{% static 'img/Login.png' %}') center;
+                                    width:35px;
+                                    height: 35px;
+                                    border-radius:80%;
+                                    background-size: cover;
+                                    zoom: 1;
+                                    opacity: 0.5;
+                            }
+                            .button-login:hover {
+	                                background:url('{% static 'img/Login.png' %}') center;
+                                    width:35px;
+                                    height: 35px;
+                                    border-radius:80%;
+                                    background-size: cover;
+                                    zoom: 1;
+                                    opacity: 1;
+                            }
+                        </style>
+                        <button class="button-login pure-button" onclick="location.href='{%url 'django.contrib.auth.views.login' %}'"></button>
+                    </li>
                     {% endif %}
                     <li class="nav-item">
                          <style scoped>

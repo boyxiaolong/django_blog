@@ -13,13 +13,15 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Atom1Feed
 from django.contrib.sites.models import get_current_site
+from django.core.paginator import Paginator
+from django.core.paginator import EmptyPage
+from django.core.paginator import PageNotAnInteger
 
 logger = logging.getLogger(__name__)
 
 # Create your views here.
 def home(request):
-    post_list = models.Article.objects.all()
-    return render(request, 'home.html', {'post_list' : post_list})
+    return index(request)
 
 def about(request):
     print "about"
@@ -119,3 +121,17 @@ class PostRssFeed(Feed):
 class PostAtomFeed(PostRssFeed):
     feed_type = Atom1Feed
     subtitle = PostRssFeed.item_description
+
+def index(request):
+    limit = 3
+    topics = models.Article.objects.all()
+    paginator = Paginator(topics, limit)
+    page = request.GET.get('page')
+    try:
+        topics = paginator.page(page)
+    except PageNotAnInteger:
+        topics = paginator.page(1)
+    except EmptyPage:
+        topics = paginator.page(paginator.num_pages)
+
+    return render_to_response('home.html', {'post_list': topics})

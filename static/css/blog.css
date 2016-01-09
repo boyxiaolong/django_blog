@@ -46,8 +46,10 @@ h3 {
     text-transform: uppercase;
 }
 .brand-tagline {
+    margin-top:20px;
     font-weight: 300;
     color: rgb(176, 202, 219);
+    margin-bottom:20px;
 }
 
 .nav-list {

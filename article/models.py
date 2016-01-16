@@ -7,6 +7,7 @@ class Article(models.Model) :
     content = models.TextField(blank = True, null = True)
     category = models.CharField(max_length = 50, blank = True)
     date_time = models.DateTimeField(auto_now_add = True)
+    read_times = models.IntegerField(blank = True)
 
     def __str__(self) :
         return self.title

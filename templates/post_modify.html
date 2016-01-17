@@ -2,11 +2,6 @@
 {% block bottom %}
     {% if user.is_authenticated %}
         <div class="pure-g">
-            <div class="modify pure-u-1-1" align="center">
-                <span class = "link edit" target="">{{post.readnum}}</span>
-            </div><!-- /.blog-post -->
-        </div>
-        <div class="pure-g">
         <div class="modify pure-u-1-2" align="center">
             <span class = "link edit"><a href="{% url "modify" id=post.id %}" target="">修改</span>
         </div><!-- /.blog-post -->

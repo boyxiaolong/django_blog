@@ -5,3 +5,5 @@ venv
 /media/*
 .idea/*
 /mdedia/*
+
+.DS_Store
